@@ -200,8 +200,8 @@ MySQLExecutable = ""
 #
 #    IPLocationFile
 #        Description: The path to your IP2Location database CSV file.
-#        Example:     "C:/Trinity/IP2LOCATION-LITE-DB1.CSV"
-#                     "/home/trinity/IP2LOCATION-LITE-DB1.CSV"
+#        Example:     "C:/Azgath/IP2LOCATION-LITE-DB1.CSV"
+#                     "/home/azgath/IP2LOCATION-LITE-DB1.CSV"
 #        Default:     ""  - (Disabled)
 
 IPLocationFile = ""
@@ -220,9 +220,9 @@ IPLocationFile = ""
 #                                                                 section my.ini)
 #                     ".;/path/to/unix_socket;username;password;database" - (use Unix sockets on
 #                                                                           Unix/Linux)
-#        Default:     "127.0.0.1;3306;trinity;trinity;auth"
+#        Default:     "127.0.0.1;3306;azgath;azgath;auth"
 
-LoginDatabaseInfo = "127.0.0.1;3309;root;root;azsl_auth"
+LoginDatabaseInfo = "127.0.0.1;3306;root;root;azsl_auth"
 
 #
 #    LoginDatabase.WorkerThreads
