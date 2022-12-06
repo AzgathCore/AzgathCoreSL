@@ -2654,7 +2654,7 @@ void Player::GiveLevel(uint8 level)
     InitTaxiNodesForLevel();
 
     //if (level < PLAYER_LEVEL_MIN_HONOR)
-        //ResetPvpTalents(); // This reset pvp talents all the time, shit code. -Varjgard
+        //ResetPvpTalents();
 
     UpdateAllStats();
 
@@ -2694,8 +2694,8 @@ void Player::InitTalentForLevel()
 {
     uint8 level = getLevel();
     // talents base at level diff (talents = level - 9 but some can be used already)
-    if (level < MIN_SPECIALIZATION_LEVEL)
-        ResetTalentSpecialization();
+    //if (level < MIN_SPECIALIZATION_LEVEL)
+        //ResetTalentSpecialization(); //spells getting added double/tripple to action bar cuz of this
 
     int32 talentTiers = DB2Manager::GetNumTalentsAtLevel(level, Classes(getClass()));
     if (level < 15)
