@@ -2650,7 +2650,7 @@ void Player::GiveLevel(uint8 level)
     SetCreateHealth(0);
     SetCreateMana(basemana);
 
-    InitTalentForLevel();
+    InitTalentForLevel(); // Spells are added to action bar in here when leveling up (and more)
     InitTaxiNodesForLevel();
 
     //if (level < PLAYER_LEVEL_MIN_HONOR)
