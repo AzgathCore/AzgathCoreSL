@@ -1569,15 +1569,15 @@ class TC_GAME_API ObjectMgr
             return &itr->second;
         }
 
-        TrinityString const* GetTrinityString(uint32 entry) const
+        TrinityString const* GetAzgathString(uint32 entry) const
         {
             TrinityStringContainer::const_iterator itr = _trinityStringStore.find(entry);
             if (itr == _trinityStringStore.end())
                 return nullptr;
             return &itr->second;
         }
-        char const* GetTrinityString(uint32 entry, LocaleConstant locale) const;
-        char const* GetTrinityStringForDBCLocale(uint32 entry) const { return GetTrinityString(entry, DBCLocaleIndex); }
+        char const* GetAzgathString(uint32 entry, LocaleConstant locale) const;
+        char const* GetAzgathStringForDBCLocale(uint32 entry) const { return GetAzgathString(entry, DBCLocaleIndex); }
         LocaleConstant GetDBCLocaleIndex() const { return DBCLocaleIndex; }
         void SetDBCLocaleIndex(LocaleConstant locale) { DBCLocaleIndex = locale; }
 

@@ -1728,7 +1728,7 @@ bool AuctionHouseObject::BuyCommodity(CharacterDatabaseTransaction trans, Player
             uint32 bidderAccId = player->GetSession()->GetAccountId();
             std::string ownerName;
             if (!sCharacterCache->GetCharacterNameByGuid(auction->Owner, ownerName))
-                ownerName = sObjectMgr->GetTrinityStringForDBCLocale(LANG_UNKNOWN);
+                ownerName = sObjectMgr->GetAzgathStringForDBCLocale(LANG_UNKNOWN);
 
             sLog->outCommand(bidderAccId, "GM %s (Account: %u) bought commodity in auction: %s (Entry: %u Count: %u) and pay money: " UI64FMTD ". Original owner %s (Account: %u)",
                 player->GetName().c_str(), bidderAccId, items[0].Items[0]->GetNameForLocaleIdx(sWorld->GetDefaultDbcLocale()).c_str(),
@@ -1842,14 +1842,14 @@ void AuctionHouseObject::SendAuctionWon(AuctionPosting const* auction, Player* b
         logGmTrade = AccountMgr::HasPermission(bidderAccId, rbac::RBAC_PERM_LOG_GM_TRADE, realm.Id.Realm);
 
         if (logGmTrade && !sCharacterCache->GetCharacterNameByGuid(auction->Bidder, bidderName))
-            bidderName = sObjectMgr->GetTrinityStringForDBCLocale(LANG_UNKNOWN);
+            bidderName = sObjectMgr->GetAzgathStringForDBCLocale(LANG_UNKNOWN);
     }
 
     if (logGmTrade)
     {
         std::string ownerName;
         if (!sCharacterCache->GetCharacterNameByGuid(auction->Owner, ownerName))
-            ownerName = sObjectMgr->GetTrinityStringForDBCLocale(LANG_UNKNOWN);
+            ownerName = sObjectMgr->GetAzgathStringForDBCLocale(LANG_UNKNOWN);
 
         uint32 ownerAccId = sCharacterCache->GetCharacterAccountIdByGuid(auction->Owner);
 

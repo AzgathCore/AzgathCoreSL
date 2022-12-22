@@ -189,7 +189,7 @@ public:
         if (!*args)
             return false;
 
-        std::string str = handler->GetTrinityString(LANG_GLOBAL_NOTIFY);
+        std::string str = handler->GetAzgathString(LANG_GLOBAL_NOTIFY);
         str += args;
 
         sWorld->SendGlobalMessage(WorldPackets::Chat::PrintNotification(str).Write());
@@ -202,7 +202,7 @@ public:
         if (!*args)
             return false;
 
-        std::string str = handler->GetTrinityString(LANG_GM_NOTIFY);
+        std::string str = handler->GetAzgathString(LANG_GM_NOTIFY);
         str += args;
 
         sWorld->SendGlobalGMMessage(WorldPackets::Chat::PrintNotification(str).Write());
@@ -214,7 +214,7 @@ public:
     {
         if (!*args)
         {
-            handler->PSendSysMessage(LANG_COMMAND_WHISPERACCEPTING, handler->GetSession()->GetPlayer()->isAcceptWhispers() ?  handler->GetTrinityString(LANG_ON) : handler->GetTrinityString(LANG_OFF));
+            handler->PSendSysMessage(LANG_COMMAND_WHISPERACCEPTING, handler->GetSession()->GetPlayer()->isAcceptWhispers() ?  handler->GetAzgathString(LANG_ON) : handler->GetAzgathString(LANG_OFF));
             return true;
         }
 

@@ -88,7 +88,7 @@ public:
         sAuctionBot->SetItemsAmount(qVals);
 
         for (int i = 0; i < MAX_AUCTION_QUALITY; ++i)
-            handler->PSendSysMessage(LANG_AHBOT_ITEMS_AMOUNT, handler->GetTrinityString(ahbotQualityIds[i]), sAuctionBotConfig->GetConfigItemQualityAmount(AuctionQuality(i)));
+            handler->PSendSysMessage(LANG_AHBOT_ITEMS_AMOUNT, handler->GetAzgathString(ahbotQualityIds[i]), sAuctionBotConfig->GetConfigItemQualityAmount(AuctionQuality(i)));
 
         return true;
     }
@@ -102,7 +102,7 @@ public:
         uint32 qualityVal = atoi(arg);
 
         sAuctionBot->SetItemsAmountForQuality(Q, qualityVal);
-        handler->PSendSysMessage(LANG_AHBOT_ITEMS_AMOUNT, handler->GetTrinityString(ahbotQualityIds[Q]),
+        handler->PSendSysMessage(LANG_AHBOT_ITEMS_AMOUNT, handler->GetAzgathString(ahbotQualityIds[Q]),
             sAuctionBotConfig->GetConfigItemQualityAmount(Q));
 
         return true;
@@ -185,7 +185,7 @@ public:
 
         uint32 fmtId = session ? LANG_AHBOT_STATUS_FORMAT_CHAT : LANG_AHBOT_STATUS_FORMAT_CONSOLE;
 
-        handler->PSendSysMessage(fmtId, handler->GetTrinityString(LANG_AHBOT_STATUS_ITEM_COUNT),
+        handler->PSendSysMessage(fmtId, handler->GetAzgathString(LANG_AHBOT_STATUS_ITEM_COUNT),
             statusInfo[AUCTION_HOUSE_ALLIANCE].ItemsCount,
             statusInfo[AUCTION_HOUSE_HORDE].ItemsCount,
             statusInfo[AUCTION_HOUSE_NEUTRAL].ItemsCount,
@@ -195,7 +195,7 @@ public:
 
         if (all)
         {
-            handler->PSendSysMessage(fmtId, handler->GetTrinityString(LANG_AHBOT_STATUS_ITEM_RATIO),
+            handler->PSendSysMessage(fmtId, handler->GetAzgathString(LANG_AHBOT_STATUS_ITEM_RATIO),
                 sAuctionBotConfig->GetConfig(CONFIG_AHBOT_ALLIANCE_ITEM_AMOUNT_RATIO),
                 sAuctionBotConfig->GetConfig(CONFIG_AHBOT_HORDE_ITEM_AMOUNT_RATIO),
                 sAuctionBotConfig->GetConfig(CONFIG_AHBOT_NEUTRAL_ITEM_AMOUNT_RATIO),
@@ -213,7 +213,7 @@ public:
                 handler->SendSysMessage(LANG_AHBOT_STATUS_TITLE2_CHAT);
 
             for (int i = 0; i < MAX_AUCTION_QUALITY; ++i)
-                handler->PSendSysMessage(fmtId, handler->GetTrinityString(ahbotQualityIds[i]),
+                handler->PSendSysMessage(fmtId, handler->GetAzgathString(ahbotQualityIds[i]),
                     statusInfo[AUCTION_HOUSE_ALLIANCE].QualityInfo[i],
                     statusInfo[AUCTION_HOUSE_HORDE].QualityInfo[i],
                     statusInfo[AUCTION_HOUSE_NEUTRAL].QualityInfo[i],

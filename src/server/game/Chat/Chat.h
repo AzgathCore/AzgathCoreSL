@@ -61,7 +61,7 @@ class TC_GAME_API ChatHandler
         static char* LineFromMessage(char*& pos) { char* start = strtok(pos, "\n"); pos = nullptr; return start; }
 
         // function with different implementation for chat/console
-        virtual char const* GetTrinityString(uint32 entry) const;
+        virtual char const* GetAzgathString(uint32 entry) const;
         virtual void SendSysMessage(char const* str, bool escapeCharacters = false);
 
         void SendSysMessage(uint32 entry);
@@ -81,7 +81,7 @@ class TC_GAME_API ChatHandler
         template<typename... Args>
         std::string PGetParseString(uint32 entry, Args&&... args) const
         {
-            return Trinity::StringFormat(GetTrinityString(entry), std::forward<Args>(args)...);
+            return Trinity::StringFormat(GetAzgathString(entry), std::forward<Args>(args)...);
         }
 
         bool ParseCommands(const char* text);
@@ -158,7 +158,7 @@ class TC_GAME_API CliHandler : public ChatHandler
         explicit CliHandler(void* callbackArg, Print* zprint) : m_callbackArg(callbackArg), m_print(zprint) { }
 
         // overwrite functions
-        char const* GetTrinityString(uint32 entry) const override;
+        char const* GetAzgathString(uint32 entry) const override;
         bool isAvailable(ChatCommand const& cmd) const override;
         bool HasPermission(uint32 /*permission*/) const override { return true; }
         void SendSysMessage(const char *str, bool escapeCharacters) override;

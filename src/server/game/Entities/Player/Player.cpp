@@ -1729,7 +1729,7 @@ bool Player::TeleportTo(AreaTriggerTeleportStruct const* at)
                         TC_LOG_DEBUG("maps", "MAP: Player '%s' cannot enter instance map '%s' because their permanent bind is incompatible with their group's", GetName().c_str(), mapName);
                         // is there a special opcode for this?
                         // @todo figure out how to get player localized difficulty string (e.g. "10 player", "Heroic" etc)
-                        ChatHandler(GetSession()).PSendSysMessage(GetSession()->GetTrinityString(LANG_INSTANCE_BIND_MISMATCH), mapName);
+                        ChatHandler(GetSession()).PSendSysMessage(GetSession()->GetAzgathString(LANG_INSTANCE_BIND_MISMATCH), mapName);
                     }
                     reviveAtTrigger = true;
                     break;
@@ -10872,7 +10872,7 @@ void Player::SetInventorySlotCount(uint8 slots)
 
             auto sendItemsBatch = [this, &trans, &unstorableItems](std::size_t batchNumber, std::size_t batchSize)
             {
-                MailDraft draft(GetSession()->GetTrinityString(LANG_NOT_EQUIPPED_ITEM), "There were problems with equipping item(s).");
+                MailDraft draft(GetSession()->GetAzgathString(LANG_NOT_EQUIPPED_ITEM), "There were problems with equipping item(s).");
                 for (std::size_t j = 0; j < batchSize; ++j)
                     draft.AddItem(unstorableItems[batchNumber * MAX_MAIL_ITEMS + j]);
 
@@ -19288,7 +19288,7 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder* holder)
                     SendTransferAborted(map->GetId(), TRANSFER_ABORT_DIFFICULTY, map->GetDifficultyID());
                     break;
                 case Map::CANNOT_ENTER_INSTANCE_BIND_MISMATCH:
-                    ChatHandler(GetSession()).PSendSysMessage(GetSession()->GetTrinityString(LANG_INSTANCE_BIND_MISMATCH), map->GetMapName());
+                    ChatHandler(GetSession()).PSendSysMessage(GetSession()->GetAzgathString(LANG_INSTANCE_BIND_MISMATCH), map->GetMapName());
                     break;
                 case Map::CANNOT_ENTER_TOO_MANY_INSTANCES:
                     SendTransferAborted(map->GetId(), TRANSFER_ABORT_TOO_MANY_INSTANCES);
@@ -20122,7 +20122,7 @@ void Player::_LoadInventory(PreparedQueryResult result, PreparedQueryResult arti
         // Send problematic items by mail
         while (!problematicItems.empty())
         {
-            std::string subject = GetSession()->GetTrinityString(LANG_NOT_EQUIPPED_ITEM);
+            std::string subject = GetSession()->GetAzgathString(LANG_NOT_EQUIPPED_ITEM);
 
             MailDraft draft(subject, "There were problems with equipping item(s).");
             for (uint8 i = 0; !problematicItems.empty() && i < MAX_MAIL_ITEMS; ++i)
@@ -21337,7 +21337,7 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
 
             if (DisableMgr::IsDisabledFor(DISABLE_TYPE_MAP, target_map, this))
             {
-                GetSession()->SendNotification("%s", GetSession()->GetTrinityString(LANG_INSTANCE_CLOSED));
+                GetSession()->SendNotification("%s", GetSession()->GetAzgathString(LANG_INSTANCE_CLOSED));
                 return false;
             }
 
@@ -21367,9 +21367,9 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
                 else if (mapDiff->Message[sWorld->GetDefaultDbcLocale()][0] != '\0'/*|| failedMapDifficultyXCondition*/) // if (missingAchievement) covered by this case
                     SendTransferAborted(target_map, TRANSFER_ABORT_DIFFICULTY, target_difficulty/*, failedMapDifficultyXCondition*/);
                 else if (missingItem)
-                    GetSession()->SendNotification(GetSession()->GetTrinityString(LANG_LEVEL_MINREQUIRED_AND_ITEM), LevelMin, ASSERT_NOTNULL(sObjectMgr->GetItemTemplate(missingItem))->GetName(GetSession()->GetSessionDbcLocale()));
+                    GetSession()->SendNotification(GetSession()->GetAzgathString(LANG_LEVEL_MINREQUIRED_AND_ITEM), LevelMin, ASSERT_NOTNULL(sObjectMgr->GetItemTemplate(missingItem))->GetName(GetSession()->GetSessionDbcLocale()));
                 else if (LevelMin)
-                    GetSession()->SendNotification(GetSession()->GetTrinityString(LANG_LEVEL_MINREQUIRED), LevelMin);
+                    GetSession()->SendNotification(GetSession()->GetAzgathString(LANG_LEVEL_MINREQUIRED), LevelMin);
                 else if (LevelMax)
                     GetSession()->SendNotification("You must be under level %u to enter.", LevelMax);
             }
@@ -26599,7 +26599,7 @@ void Player::AutoUnequip(Item* item)
         item->DeleteFromInventoryDB(trans);                   // deletes item from character's inventory
         item->SaveToDB(trans);                                // recursive and not have transaction guard into self, item not in inventory and can be save standalone
 
-        std::string subject = GetSession()->GetTrinityString(LANG_NOT_EQUIPPED_ITEM);
+        std::string subject = GetSession()->GetAzgathString(LANG_NOT_EQUIPPED_ITEM);
         MailDraft(subject, "There were problems with equipping one or several items").AddItem(item).SendMailTo(trans, this, MailSender(this, MAIL_STATIONERY_GM), MAIL_CHECK_MASK_COPIED);
 
         CharacterDatabase.CommitTransaction(trans);

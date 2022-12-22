@@ -518,8 +518,8 @@ void PhasingHandler::PrintToChat(ChatHandler* chat, PhaseShift const& phaseShift
     if (!phaseShift.Phases.empty())
     {
         std::ostringstream phases;
-        std::string cosmetic = sObjectMgr->GetTrinityString(LANG_PHASE_FLAG_COSMETIC, chat->GetSessionDbLocaleIndex());
-        std::string personal = sObjectMgr->GetTrinityString(LANG_PHASE_FLAG_PERSONAL, chat->GetSessionDbLocaleIndex());
+        std::string cosmetic = sObjectMgr->GetAzgathString(LANG_PHASE_FLAG_COSMETIC, chat->GetSessionDbLocaleIndex());
+        std::string personal = sObjectMgr->GetAzgathString(LANG_PHASE_FLAG_PERSONAL, chat->GetSessionDbLocaleIndex());
         for (PhaseShift::PhaseRef const& phase : phaseShift.Phases)
         {
             phases << phase.Id;

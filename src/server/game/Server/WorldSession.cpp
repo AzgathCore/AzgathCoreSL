@@ -685,7 +685,7 @@ void WorldSession::SendNotification(char const* format, ...)
 
 void WorldSession::SendNotification(uint32 stringId, ...)
 {
-    char const* format = GetTrinityString(stringId);
+    char const* format = GetAzgathString(stringId);
     if (format)
     {
         va_list ap;
@@ -704,9 +704,9 @@ bool WorldSession::CanSpeak() const
     return m_muteTime <= GameTime::GetGameTime();
 }
 
-char const* WorldSession::GetTrinityString(uint32 entry) const
+char const* WorldSession::GetAzgathString(uint32 entry) const
 {
-    return sObjectMgr->GetTrinityString(entry, GetSessionDbLocaleIndex());
+    return sObjectMgr->GetAzgathString(entry, GetSessionDbLocaleIndex());
 }
 
 void WorldSession::ResetTimeOutTime()

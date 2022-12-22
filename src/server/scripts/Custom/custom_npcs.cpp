@@ -445,7 +445,7 @@ public:
         if (player->IsInCombat() || player->InArena() || player->InBattleground())
         {
             CloseGossipMenuFor(player);
-            player->GetSession()->SendNotification(sObjectMgr->GetTrinityStringForDBCLocale(789000));
+            player->GetSession()->SendNotification(sObjectMgr->GetAzgathStringForDBCLocale(789000));
             return false;
         } else {
             AddGossipItemFor(player, GOSSIP_ICON_TRANSMOGRIFIER, "Random morph", GOSSIP_SENDER_MAIN, ACTION_RANDOM_MORPH);

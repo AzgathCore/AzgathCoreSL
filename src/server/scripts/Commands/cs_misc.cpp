@@ -285,7 +285,7 @@ public:
         else
             handler->PSendSysMessage(LANG_GPS_NO_VMAP);
 
-        char const* unknown = handler->GetTrinityString(LANG_UNKNOWN);
+        char const* unknown = handler->GetAzgathString(LANG_UNKNOWN);
 
         handler->PSendSysMessage(LANG_MAP_POSITION,
             mapId, (mapEntry ? mapEntry->MapName[handler->GetSessionDbcLocale()] : unknown),
@@ -622,7 +622,7 @@ public:
 
             std::string nameLink = handler->playerLink(targetName);
 
-            handler->PSendSysMessage(LANG_SUMMONING, nameLink.c_str(), handler->GetTrinityString(LANG_OFFLINE));
+            handler->PSendSysMessage(LANG_SUMMONING, nameLink.c_str(), handler->GetAzgathString(LANG_OFFLINE));
 
             // in point where GM stay
             CharacterDatabaseTransaction dummy;
@@ -816,14 +816,14 @@ public:
             SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellIid, target->GetMap()->GetDifficultyID());
             if (!spellInfo)
             {
-                handler->PSendSysMessage(LANG_UNKNOWN_SPELL, owner == handler->GetSession()->GetPlayer() ? handler->GetTrinityString(LANG_YOU) : nameLink.c_str());
+                handler->PSendSysMessage(LANG_UNKNOWN_SPELL, owner == handler->GetSession()->GetPlayer() ? handler->GetAzgathString(LANG_YOU) : nameLink.c_str());
                 handler->SetSentErrorMessage(true);
                 return false;
             }
 
             target->GetSpellHistory()->ResetCooldown(spellIid, true);
             target->GetSpellHistory()->ResetCharges(spellInfo->ChargeCategoryId);
-            handler->PSendSysMessage(LANG_REMOVE_COOLDOWN, spellIid, owner == handler->GetSession()->GetPlayer() ? handler->GetTrinityString(LANG_YOU) : nameLink.c_str());
+            handler->PSendSysMessage(LANG_REMOVE_COOLDOWN, spellIid, owner == handler->GetSession()->GetPlayer() ? handler->GetAzgathString(LANG_YOU) : nameLink.c_str());
         }
         return true;
     }
@@ -968,7 +968,7 @@ public:
         if (handler->HasLowerSecurity(target, ObjectGuid::Empty))
             return false;
 
-        std::string kickReasonStr = handler->GetTrinityString(LANG_NO_REASON);
+        std::string kickReasonStr = handler->GetAzgathString(LANG_NO_REASON);
         if (*args != '\0')
         {
             char const* kickReason = strtok(nullptr, "\r");
@@ -1157,14 +1157,14 @@ public:
 
             team = data->team;
 
-            std::string team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_NOTEAM);
+            std::string team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_NOTEAM);
 
             if (team == 0)
-                team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_ANY);
+                team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_ANY);
             else if (team == HORDE)
-                team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_HORDE);
+                team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_HORDE);
             else if (team == ALLIANCE)
-                team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_ALLIANCE);
+                team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_ALLIANCE);
 
             handler->PSendSysMessage(LANG_COMMAND_GRAVEYARDNEAREST, graveyardId, team_name.c_str(), zone_id);
         }
@@ -1173,9 +1173,9 @@ public:
             std::string team_name;
 
             if (team == HORDE)
-                team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_HORDE);
+                team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_HORDE);
             else if (team == ALLIANCE)
-                team_name = handler->GetTrinityString(LANG_COMMAND_GRAVEYARD_ALLIANCE);
+                team_name = handler->GetAzgathString(LANG_COMMAND_GRAVEYARD_ALLIANCE);
 
             if (!team)
                 handler->PSendSysMessage(LANG_COMMAND_ZONENOGRAVEYARDS, zone_id);
@@ -1348,7 +1348,7 @@ public:
         if (!playerTarget)
             playerTarget = player;
 
-        TC_LOG_DEBUG("misc", handler->GetTrinityString(LANG_ADDITEM), itemId, count);
+        TC_LOG_DEBUG("misc", handler->GetAzgathString(LANG_ADDITEM), itemId, count);
 
         ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(itemId);
         if (!itemTemplate)
@@ -1438,7 +1438,7 @@ public:
         if (!playerTarget)
             playerTarget = player;
 
-        TC_LOG_DEBUG("misc", handler->GetTrinityString(LANG_ADDITEMSET), itemSetId);
+        TC_LOG_DEBUG("misc", handler->GetAzgathString(LANG_ADDITEMSET), itemSetId);
 
         bool found = false;
         ItemTemplateContainer const* its = sObjectMgr->GetItemTemplateStore();
@@ -1678,38 +1678,38 @@ public:
          */
 
         // Account data print variables
-        std::string userName          = handler->GetTrinityString(LANG_ERROR);
+        std::string userName          = handler->GetAzgathString(LANG_ERROR);
         uint32 accId                  = 0;
         ObjectGuid::LowType lowguid   = targetGuid.GetCounter();
-        std::string eMail             = handler->GetTrinityString(LANG_ERROR);
-        std::string regMail           = handler->GetTrinityString(LANG_ERROR);
+        std::string eMail             = handler->GetAzgathString(LANG_ERROR);
+        std::string regMail           = handler->GetAzgathString(LANG_ERROR);
         uint32 security               = 0;
-        std::string lastIp            = handler->GetTrinityString(LANG_ERROR);
+        std::string lastIp            = handler->GetAzgathString(LANG_ERROR);
         uint8 locked                  = 0;
-        std::string lastLogin         = handler->GetTrinityString(LANG_ERROR);
+        std::string lastLogin         = handler->GetAzgathString(LANG_ERROR);
         uint32 failedLogins           = 0;
         uint32 latency                = 0;
-        std::string OS                = handler->GetTrinityString(LANG_UNKNOWN);
+        std::string OS                = handler->GetAzgathString(LANG_UNKNOWN);
 
         // Mute data print variables
         int64 muteTime                = -1;
-        std::string muteReason        = handler->GetTrinityString(LANG_NO_REASON);
-        std::string muteBy            = handler->GetTrinityString(LANG_UNKNOWN);
+        std::string muteReason        = handler->GetAzgathString(LANG_NO_REASON);
+        std::string muteBy            = handler->GetAzgathString(LANG_UNKNOWN);
 
         // Ban data print variables
         int64 banTime                 = -1;
-        std::string banType           = handler->GetTrinityString(LANG_UNKNOWN);
-        std::string banReason         = handler->GetTrinityString(LANG_NO_REASON);
-        std::string bannedBy          = handler->GetTrinityString(LANG_UNKNOWN);
+        std::string banType           = handler->GetAzgathString(LANG_UNKNOWN);
+        std::string banReason         = handler->GetAzgathString(LANG_NO_REASON);
+        std::string bannedBy          = handler->GetAzgathString(LANG_UNKNOWN);
 
         // Character data print variables
         uint8 raceid, classid           = 0; //RACE_NONE, CLASS_NONE
-        std::string raceStr, classStr   = handler->GetTrinityString(LANG_UNKNOWN);
+        std::string raceStr, classStr   = handler->GetAzgathString(LANG_UNKNOWN);
         uint8 gender                    = 0;
         LocaleConstant locale           = handler->GetSessionDbcLocale();
         uint32 totalPlayerTime          = 0;
         uint8 level                     = 0;
-        std::string alive               = handler->GetTrinityString(LANG_ERROR);
+        std::string alive               = handler->GetAzgathString(LANG_ERROR);
         uint64 money                    = 0;
         uint32 xp                       = 0;
         uint32 xptotal                  = 0;
@@ -1717,8 +1717,8 @@ public:
         // Position data print
         uint32 mapId;
         uint32 areaId;
-        std::string areaName    = handler->GetTrinityString(LANG_UNKNOWN);
-        std::string zoneName    = handler->GetTrinityString(LANG_UNKNOWN);
+        std::string areaName    = handler->GetAzgathString(LANG_UNKNOWN);
+        std::string zoneName    = handler->GetAzgathString(LANG_UNKNOWN);
 
         // Guild data print variables defined so that they exist, but are not necessarily used
         ObjectGuid::LowType guildId = UI64LIT(0);
@@ -1746,7 +1746,7 @@ public:
             muteTime          = target->GetSession()->m_muteTime;
             mapId             = target->GetMapId();
             areaId            = target->GetAreaId();
-            alive             = target->IsAlive() ? handler->GetTrinityString(LANG_YES) : handler->GetTrinityString(LANG_NO);
+            alive             = target->IsAlive() ? handler->GetAzgathString(LANG_YES) : handler->GetAzgathString(LANG_NO);
             gender            = target->GetNativeSex();
         }
         // get additional information from DB
@@ -1778,9 +1778,9 @@ public:
             uint32 playerFlags = fields[10].GetUInt32();
 
             if (!health || playerFlags & PLAYER_FLAGS_GHOST)
-                alive = handler->GetTrinityString(LANG_NO);
+                alive = handler->GetAzgathString(LANG_NO);
             else
-                alive = handler->GetTrinityString(LANG_YES);
+                alive = handler->GetAzgathString(LANG_YES);
         }
 
         // Query the prepared statement for login data
@@ -1813,10 +1813,10 @@ public:
             }
             else
             {
-                eMail     = handler->GetTrinityString(LANG_UNAUTHORIZED);
-                regMail   = handler->GetTrinityString(LANG_UNAUTHORIZED);
-                lastIp    = handler->GetTrinityString(LANG_UNAUTHORIZED);
-                lastLogin = handler->GetTrinityString(LANG_UNAUTHORIZED);
+                eMail     = handler->GetAzgathString(LANG_UNAUTHORIZED);
+                regMail   = handler->GetAzgathString(LANG_UNAUTHORIZED);
+                lastIp    = handler->GetAzgathString(LANG_UNAUTHORIZED);
+                lastLogin = handler->GetAzgathString(LANG_UNAUTHORIZED);
             }
             muteTime      = fields[6].GetUInt64();
             muteReason    = fields[7].GetString();
@@ -1835,7 +1835,7 @@ public:
         PreparedQueryResult result2 = LoginDatabase.Query(stmt2);
         if (!result2)
         {
-            banType = handler->GetTrinityString(LANG_CHARACTER);
+            banType = handler->GetAzgathString(LANG_CHARACTER);
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_PINFO_BANS);
             stmt->setUInt64(0, lowguid);
             result2 = CharacterDatabase.Query(stmt);
@@ -1882,7 +1882,7 @@ public:
 
         // Initiate output
         // Output I. LANG_PINFO_PLAYER
-        handler->PSendSysMessage(LANG_PINFO_PLAYER, target ? "" : handler->GetTrinityString(LANG_OFFLINE), nameLink.c_str(), targetGuid.ToString().c_str());
+        handler->PSendSysMessage(LANG_PINFO_PLAYER, target ? "" : handler->GetAzgathString(LANG_OFFLINE), nameLink.c_str(), targetGuid.ToString().c_str());
 
         // Output II. LANG_PINFO_GM_ACTIVE if character is gamemaster
         if (target && target->IsGameMaster())
@@ -1890,7 +1890,7 @@ public:
 
         // Output III. LANG_PINFO_BANNED if ban exists and is applied
         if (banTime >= 0)
-            handler->PSendSysMessage(LANG_PINFO_BANNED, banType.c_str(), banReason.c_str(), banTime > 0 ? secsToTimeString(banTime - time(nullptr), true).c_str() : handler->GetTrinityString(LANG_PERMANENTLY), bannedBy.c_str());
+            handler->PSendSysMessage(LANG_PINFO_BANNED, banType.c_str(), banReason.c_str(), banTime > 0 ? secsToTimeString(banTime - time(nullptr), true).c_str() : handler->GetAzgathString(LANG_PERMANENTLY), bannedBy.c_str());
 
         // Output IV. LANG_PINFO_MUTED if mute is applied
         if (muteTime > 0)
@@ -1909,7 +1909,7 @@ public:
         handler->PSendSysMessage(LANG_PINFO_ACC_REGMAILS, regMail.c_str(), eMail.c_str());
 
         // Output IX. LANG_PINFO_ACC_IP
-        handler->PSendSysMessage(LANG_PINFO_ACC_IP, lastIp.c_str(), locked ? handler->GetTrinityString(LANG_YES) : handler->GetTrinityString(LANG_NO));
+        handler->PSendSysMessage(LANG_PINFO_ACC_IP, lastIp.c_str(), locked ? handler->GetAzgathString(LANG_YES) : handler->GetAzgathString(LANG_NO));
 
         // Output X. LANG_PINFO_CHR_LEVEL
         if (level != sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
@@ -1920,7 +1920,7 @@ public:
         // Output XI. LANG_PINFO_CHR_RACE
         raceStr  = DB2Manager::GetChrRaceName(raceid, locale);
         classStr = DB2Manager::GetClassName(classid, locale);
-        handler->PSendSysMessage(LANG_PINFO_CHR_RACE, (gender == 0 ? handler->GetTrinityString(LANG_CHARACTER_GENDER_MALE) : handler->GetTrinityString(LANG_CHARACTER_GENDER_FEMALE)), raceStr.c_str(), classStr.c_str());
+        handler->PSendSysMessage(LANG_PINFO_CHR_RACE, (gender == 0 ? handler->GetAzgathString(LANG_CHARACTER_GENDER_MALE) : handler->GetAzgathString(LANG_CHARACTER_GENDER_FEMALE)), raceStr.c_str(), classStr.c_str());
 
         // Output XII. LANG_PINFO_CHR_ALIVE
         handler->PSendSysMessage(LANG_PINFO_CHR_ALIVE, alive.c_str());
@@ -1949,8 +1949,8 @@ public:
 
         if (target)
             handler->PSendSysMessage(LANG_PINFO_CHR_MAP, map->MapName[handler->GetSessionDbcLocale()],
-                (!zoneName.empty() ? zoneName.c_str() : handler->GetTrinityString(LANG_UNKNOWN)),
-                (!areaName.empty() ? areaName.c_str() : handler->GetTrinityString(LANG_UNKNOWN)));
+                (!zoneName.empty() ? zoneName.c_str() : handler->GetAzgathString(LANG_UNKNOWN)),
+                (!areaName.empty() ? areaName.c_str() : handler->GetAzgathString(LANG_UNKNOWN)));
 
         // Output XVII. - XVIX. if they are not empty
         if (!guildName.empty())
@@ -2022,7 +2022,7 @@ public:
             return false;
 
         char const* muteReason = strtok(nullptr, "\r");
-        std::string muteReasonStr = handler->GetTrinityString(LANG_NO_REASON);
+        std::string muteReasonStr = handler->GetAzgathString(LANG_NO_REASON);
         if (muteReason != nullptr)
             muteReasonStr = muteReason;
 
@@ -2050,7 +2050,7 @@ public:
         if (handler->GetSession())
             muteBy = handler->GetSession()->GetPlayerName();
         else
-            muteBy = handler->GetTrinityString(LANG_CONSOLE);
+            muteBy = handler->GetAzgathString(LANG_CONSOLE);
 
         if (target)
         {

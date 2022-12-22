@@ -40,7 +40,7 @@ WorldPackets::Packet* Trinity::TrinityStringChatBuilder::operator()(LocaleConsta
 {
     WorldPackets::Chat::Chat* packet = new WorldPackets::Chat::Chat();
 
-    char const* text = sObjectMgr->GetTrinityString(_textId, locale);
+    char const* text = sObjectMgr->GetAzgathString(_textId, locale);
 
     if (_args)
     {

@@ -8581,16 +8581,16 @@ bool ObjectMgr::LoadTrinityStrings()
     return true;
 }
 
-char const* ObjectMgr::GetTrinityString(uint32 entry, LocaleConstant locale) const
+char const* ObjectMgr::GetAzgathString(uint32 entry, LocaleConstant locale) const
 {
-    if (TrinityString const* ts = GetTrinityString(entry))
+    if (TrinityString const* ts = GetAzgathString(entry))
     {
         if (ts->Content.size() > size_t(locale) && !ts->Content[locale].empty())
             return ts->Content[locale].c_str();
         return ts->Content[DEFAULT_LOCALE].c_str();
     }
 
-    TC_LOG_ERROR("sql.sql", "Trinity string entry %u not found in DB.", entry);
+    TC_LOG_ERROR("sql.sql", "Azgath string entry %u not found in DB.", entry);
     return "<error>";
 }
 

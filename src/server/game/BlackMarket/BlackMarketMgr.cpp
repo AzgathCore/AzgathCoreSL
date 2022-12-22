@@ -275,7 +275,7 @@ void BlackMarketMgr::SendAuctionWonMail(BlackMarketEntry* entry, CharacterDataba
         logGmTrade = AccountMgr::HasPermission(bidderAccId, rbac::RBAC_PERM_LOG_GM_TRADE, realm.Id.Realm);
 
         if (logGmTrade && !sCharacterCache->GetCharacterNameByGuid(bidderGuid, bidderName))
-            bidderName = sObjectMgr->GetTrinityStringForDBCLocale(LANG_UNKNOWN);
+            bidderName = sObjectMgr->GetAzgathStringForDBCLocale(LANG_UNKNOWN);
     }
 
     // Create item

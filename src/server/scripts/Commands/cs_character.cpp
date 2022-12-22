@@ -270,7 +270,7 @@ public:
 
         LocaleConstant loc = handler->GetSessionDbcLocale();
         char const* targetName = target->GetName().c_str();
-        char const* knownStr = handler->GetTrinityString(LANG_KNOWN);
+        char const* knownStr = handler->GetAzgathString(LANG_KNOWN);
 
         // Search in CharTitles.dbc
         for (uint32 id = 0; id < sCharTitlesStore.GetNumRows(); id++)
@@ -284,7 +284,7 @@ public:
                     continue;
 
                 char const* activeStr = target->m_playerData->PlayerTitle == titleInfo->MaskID
-                ? handler->GetTrinityString(LANG_ACTIVE)
+                ? handler->GetAzgathString(LANG_ACTIVE)
                 : "";
 
                 std::string titleNameStr = Trinity::StringFormat(name.c_str(), targetName);
@@ -630,7 +630,7 @@ public:
                 sLog->outCommand(session->GetAccountId(), "GM %s (Account: %u) %s", player->GetName().c_str(), session->GetAccountId(), logString.c_str());
         }
         else
-            sLog->outCommand(0, "%s %s", handler->GetTrinityString(LANG_CONSOLE), logString.c_str());
+            sLog->outCommand(0, "%s %s", handler->GetAzgathString(LANG_CONSOLE), logString.c_str());
         return true;
     }
 
@@ -649,7 +649,7 @@ public:
             FactionEntry const* factionEntry = sFactionStore.LookupEntry(faction.ID);
             char const* factionName = factionEntry ? factionEntry->Name[loc] : "#Not found#";
             ReputationRank rank = target->GetReputationMgr().GetRank(factionEntry);
-            std::string rankName = handler->GetTrinityString(ReputationRankStrIndex[rank]);
+            std::string rankName = handler->GetAzgathString(ReputationRankStrIndex[rank]);
             std::ostringstream ss;
             if (handler->GetSession())
                 ss << faction.ID << " - |cffffffff|Hfaction:" << faction.ID << "|h[" << factionName << ' ' << localeNames[loc] << "]|h|r";
@@ -659,17 +659,17 @@ public:
             ss << ' ' << rankName << " (" << target->GetReputationMgr().GetReputation(factionEntry) << ')';
 
             if (faction.Flags & FACTION_FLAG_VISIBLE)
-                ss << handler->GetTrinityString(LANG_FACTION_VISIBLE);
+                ss << handler->GetAzgathString(LANG_FACTION_VISIBLE);
             if (faction.Flags & FACTION_FLAG_AT_WAR)
-                ss << handler->GetTrinityString(LANG_FACTION_ATWAR);
+                ss << handler->GetAzgathString(LANG_FACTION_ATWAR);
             if (faction.Flags & FACTION_FLAG_PEACE_FORCED)
-                ss << handler->GetTrinityString(LANG_FACTION_PEACE_FORCED);
+                ss << handler->GetAzgathString(LANG_FACTION_PEACE_FORCED);
             if (faction.Flags & FACTION_FLAG_HIDDEN)
-                ss << handler->GetTrinityString(LANG_FACTION_HIDDEN);
+                ss << handler->GetAzgathString(LANG_FACTION_HIDDEN);
             if (faction.Flags & FACTION_FLAG_INVISIBLE_FORCED)
-                ss << handler->GetTrinityString(LANG_FACTION_INVISIBLE_FORCED);
+                ss << handler->GetAzgathString(LANG_FACTION_INVISIBLE_FORCED);
             if (faction.Flags & FACTION_FLAG_INACTIVE)
-                ss << handler->GetTrinityString(LANG_FACTION_INACTIVE);
+                ss << handler->GetAzgathString(LANG_FACTION_INACTIVE);
 
             handler->SendSysMessage(ss.str().c_str());
         }

@@ -2649,7 +2649,7 @@ namespace Trinity
 
             void operator()(WorldPacketList& dataList, LocaleConstant locale)
             {
-                char const* text = sObjectMgr->GetTrinityString(i_textId, locale);
+                char const* text = sObjectMgr->GetAzgathString(i_textId, locale);
 
                 char strBuffer[BufferSize];
                 if (i_args)

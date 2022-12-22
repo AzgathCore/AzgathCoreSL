@@ -208,7 +208,7 @@ public:
 
         if (!*args)
         {
-            handler->PSendSysMessage(LANG_YOU_ARE, _player->isGMVisible() ? handler->GetTrinityString(LANG_VISIBLE) : handler->GetTrinityString(LANG_INVISIBLE));
+            handler->PSendSysMessage(LANG_YOU_ARE, _player->isGMVisible() ? handler->GetAzgathString(LANG_VISIBLE) : handler->GetAzgathString(LANG_INVISIBLE));
             return true;
         }
 

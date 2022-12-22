@@ -434,8 +434,8 @@ public:
 
         std::string param = (char*)args;
 
-        char const* talentStr = handler->GetTrinityString(LANG_TALENT);
-        char const* passiveStr = handler->GetTrinityString(LANG_PASSIVE);
+        char const* talentStr = handler->GetAzgathString(LANG_TALENT);
+        char const* passiveStr = handler->GetAzgathString(LANG_PASSIVE);
 
         Unit::AuraApplicationMap const& auras = unit->GetAppliedAuras();
         handler->PSendSysMessage(LANG_COMMAND_TARGET_LISTAURAS, std::to_string(auras.size()).c_str());
